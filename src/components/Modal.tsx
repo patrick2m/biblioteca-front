@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 
-import { Livro } from '../App'
-import { api } from '../lib/axios'
+import { Livro } from '../App';
+import { api } from '../lib/axios';
 
-const Modal = (livroAtual: Livro) => {
+type ModalProps = {
+  data: Livro
+}
+
+const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
   const [ novoNome, setNovoNome ] = useState(livroAtual.nome)
   const [ novoCategoria, setNovoCategoria ] = useState(livroAtual.categoria)
   const [ novoDataLancamento, setNovoDataLancamento ] = useState(livroAtual.dataLancamento)
@@ -25,7 +29,7 @@ const Modal = (livroAtual: Livro) => {
   }
 
   function handleSaveBookInfo(){
-    api.put('/salvarLivro', {
+    api.patch('/salvarLivro', {
       params: {
         id: livroAtual.id,
         nome: novoNome,
