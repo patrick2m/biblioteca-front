@@ -1,13 +1,13 @@
-import { FormEvent, useEffect, useState } from 'react'
-import './App.css'
-// import { api } from './lib/axios'
+import { FormEvent, useEffect, useState } from 'react';
+import './App.css';
+import Modal from './components/Modal';
+// import { api } from './lib/axios';
 
-
-type Livro = {
+export type Livro = {
   id: number,
-  name: string,
+  nome: string,
   categoria: string,
-  dataLançamento: string,
+  dataLancamento: string,
   eNacional: boolean
 }
 
@@ -25,7 +25,6 @@ function App() {
   }, [])
 
   function handleForm(event: FormEvent){
-    console.log(tipoPesquisa)
     event.preventDefault();
     if (tipoPesquisa == "Nome") {
       setFiltro(true)
@@ -60,7 +59,7 @@ function App() {
     //   setRespostaPesquisa(res.data)
     // })
   }
-  
+
   function handleTipoPesquisa(event: React.ChangeEvent<HTMLSelectElement>) {
     setTipoPesquisa(event.target.value);
     if (event.target.value === 'Data') {
@@ -104,10 +103,11 @@ function App() {
           respostaPesquisa.map((livro) => {
             return (
               <div key={livro.id}>
-                <h2>{livro.name}</h2>
+                <h2>{livro.nome}</h2>
                 <p>{livro.categoria}</p>
                 <p>{livro.dataLançamento}</p>
                 <p>{livro.eNacional? 'Sim' : 'Não'}</p>
+                <button onClick={() => <Modal  />}>Editar</button>
               </div>
             )
           })
