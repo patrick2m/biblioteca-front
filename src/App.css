@@ -8,3 +8,8 @@
   flex-direction: row;
   height: 40px;
 }
+
+.livro {
+  display: flex;
+  flex-direction: row;
+}

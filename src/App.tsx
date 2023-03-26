@@ -1,13 +1,15 @@
 import { FormEvent, useEffect, useState } from 'react';
 import './App.css';
+import AdicionarLivro from './components/AdicionarLivro';
 import Modal from './components/Modal';
-// import { api } from './lib/axios';
+import { api } from './lib/axios';
 type Pesquisa = string;
+
 export type Livro = {
   id: number,
   nome: string,
   categoria: string,
-  dataLancamento: string,
+  dataLancamento: Date,
   eNacional: boolean
 }
 
@@ -20,9 +22,9 @@ function App() {
   const [ tipoEntradaTexto, setTipoEntradaTexto ] = useState(true);
 
   useEffect(() => {
-    // api.get(``).then(res => {
-      // setRespostaPesquisa(res.data)
-    // })
+    api.get('/Livros').then(res => {
+      setRespostaPesquisa(res.data)
+    })
   }, [])
 
   function handleForm(event: FormEvent){
@@ -82,6 +84,8 @@ function App() {
 
   return (
     <div className="App">
+      <div><h1>Biblioteca digital</h1></div>
+      <div><AdicionarLivro /></div>
       <div className="header">
         <form onSubmit={handleForm} className="form">
           {tipoEntradaTexto  ? (
@@ -118,12 +122,14 @@ function App() {
       <div>
         {respostaPesquisa ? (
           respostaPesquisa.map((livro) => {
-            const livroLocal = livro
             return (
-              <div key={livro.id}>
+              <div 
+                key={livro.id}
+                className="livro"
+              >
                 <h2>{livro.nome}</h2>
                 <p>{livro.categoria}</p>
-                <p>{livro.dataLancamento}</p>
+                <p>Data : {livro.dataLancamento}</p>
                 <p>{livro.eNacional? 'Sim' : 'Não'}</p>
                 <button onClick={() => <Modal data={livro} />}>Editar</button>
               </div>
