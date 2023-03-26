@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
         id: livroAtual.id,
         nome: novoNome,
         categoria: novoCategoria,
-        dataLancamento: novoDataLancamento,
+        dataLancamento: new Date(novoDataLancamento),
         eNacional: novoENacional
       }
     })

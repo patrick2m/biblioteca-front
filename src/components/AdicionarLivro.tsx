@@ -1,34 +1,44 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { api } from '../lib/axios';
 
-
 const AdicionarLivro = () => {
-  const [ Nome, setNome ] = useState<string>()
-  const [ Categoria, setCategoria ] = useState<string>()
+  const [ Nome, setNome ] = useState<string>('')
+  const [ Categoria, setCategoria ] = useState<string>('Ação')
   const [ DataLancamento, setDataLancamento ] = useState<string>('')
   const [ ENacional, setENacional ] = useState<boolean>(false)
 
-  function handleAdicionarLivro() {
-    api.post('/Livros', {
-      nome: Nome,
-      categoria: Categoria,
-      dataLancamento: new Date(DataLancamento),
-      eNacional: ENacional
-    }).then(response => {
-      console.log(response.data)
-    }).catch(error => {
-      console.log(error);
-    });
+  function handleSubmit(event: FormEvent){
+    event.preventDefault()
+    if (DataLancamento == '') {
+      alert('Você não selecionou a data')
+      return
+    }
+
+    const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${Nome}, Categoria : ${Categoria}, DataLancamento : ${DataLancamento}, É Nacional : ${ENacional}`);
+   
+    if (confirmado) {
+      api.post('/Livros', {
+        nome: Nome,
+        categoria: Categoria,
+        dataLancamento: new Date(DataLancamento).toISOString(),
+        eNacional: ENacional
+      }).then(response => {
+        if (response.status === 201) {
+          alert('Livro adicionado com sucesso')
+        } else {
+          alert('Erro ao adicionar o Livro')
+        }
+      }).catch(error => {
+        console.log(error);
+      });
+    }
   }
 
-  function handleSubmit(){
-
-  }
   return (
-    <div>
+    <div className='AdicionarContainer'>
       <form onSubmit={handleSubmit}>
-        <span>Nome :</span><input type="text" value={Nome} onChange={event => setNome(event.target.value)}/>
-        <span>Categoria :</span>
+        <span>Nome : </span><input type="text" value={Nome} onChange={event => setNome(event.target.value)}/>
+        <span> Categoria : </span>
         <select value={Categoria} onChange={event => setCategoria(event.target.value)}>
             <option value="Ação">Ação</option>
             <option value="Aventura">Aventura</option>
@@ -44,19 +54,15 @@ const AdicionarLivro = () => {
             <option value="Romance">Romance</option>
             <option value="Suspense">Suspense</option>
             <option value="Terror">Terror</option>
-            <option value=""></option>
           </select>
-        <span>Data de Lançamento :</span><input type="Date" value={DataLancamento} onChange={event => setDataLancamento(event.target.value)}/>
-        <span>É Nacional?</span><input type="checkbox" name="eNacional" checked={ENacional} onChange={event => setENacional(event.target.checked)}/>
+        <span> Data de Lançamento :</span><input type="Date" value={DataLancamento} onChange={event => setDataLancamento(event.target.value)}/>
+        <span> É Nacional?</span><input type="checkbox" name="eNacional" checked={ENacional} onChange={event => setENacional(event.target.checked)}/>
+      <button onClick={handleSubmit}>
+        Adicionar
+      </button>
       </form>
-      <button onClick={handleAdicionarLivro}>
-        AdicionarLivroTeste
-      </button>
-      <button onClick={() => console.log(Nome, Categoria, DataLancamento, ENacional)}>
-        console
-      </button>
     </div>
   )
 }
 
-export default AdicionarLivro
+export default AdicionarLivro;
