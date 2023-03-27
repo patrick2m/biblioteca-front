@@ -40,21 +40,22 @@ const AdicionarLivro = () => {
         <span>Nome : </span><input type="text" value={Nome} onChange={event => setNome(event.target.value)}/>
         <span> Categoria : </span>
         <select value={Categoria} onChange={event => setCategoria(event.target.value)}>
-            <option value="Ação">Ação</option>
-            <option value="Aventura">Aventura</option>
-            <option value="Científico">Científico</option>
-            <option value="Comédia">Comédia</option>
-            <option value="Drama">Drama</option>
-            <option value="Fantasia">Fantasia</option>
-            <option value="Ficção Científica">Ficção Científica</option>
-            <option value="História">História</option>
-            <option value="Infantil">Infantil</option>
-            <option value="Literatura">Literatura</option>
-            <option value="Religioso">Religioso</option>
-            <option value="Romance">Romance</option>
-            <option value="Suspense">Suspense</option>
-            <option value="Terror">Terror</option>
-          </select>
+          <option value="Ação">Ação</option>
+          <option value="Aventura">Aventura</option>
+          <option value="Biografia">Biografia</option>
+          <option value="Científico">Científico</option>
+          <option value="Comédia">Comédia</option>
+          <option value="Drama">Drama</option>
+          <option value="Fantasia">Fantasia</option>
+          <option value="Ficção Científica">Ficção Científica</option>
+          <option value="História">História</option>
+          <option value="Infantil">Infantil</option>
+          <option value="Literatura">Literatura</option>
+          <option value="Religioso">Religioso</option>
+          <option value="Romance">Romance</option>
+          <option value="Suspense">Suspense</option>
+          <option value="Terror">Terror</option>
+        </select>
         <span> Data de Lançamento :</span><input type="Date" value={DataLancamento} onChange={event => setDataLancamento(event.target.value)}/>
         <span> É Nacional?</span><input type="checkbox" name="eNacional" checked={ENacional} onChange={event => setENacional(event.target.checked)}/>
       <button onClick={handleSubmit}>

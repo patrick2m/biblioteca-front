@@ -1,67 +1,101 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 import { Livro } from '../App';
 import { api } from '../lib/axios';
 
 type ModalProps = {
-  data: Livro
-}
+  livro: Livro;
+  onClose: () => void;
+};
 
-const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
-  const [ novoNome, setNovoNome ] = useState(livroAtual.nome)
-  const [ novoCategoria, setNovoCategoria ] = useState(livroAtual.categoria)
-  const [ novoDataLancamento, setNovoDataLancamento ] = useState(livroAtual.dataLancamento)
-  const [ novoENacional, setNovoENacional ] = useState(livroAtual.eNacional)
+const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
+  const [nome, setNome] = useState(livro.nome);
+  const [categoria, setCategoria] = useState(livro.categoria);
+  const [dataLancamento, setDataLancamento] = useState(livro.dataLancamento);
+  const [eNacional, setENacional] = useState(livro.eNacional);
 
-  function handleSaveBookInfo(){
-    api.patch('/salvarLivro', {
-      params: {
-        id: livroAtual.id,
-        nome: novoNome,
-        categoria: novoCategoria,
-        dataLancamento: new Date(novoDataLancamento),
-        eNacional: novoENacional
-      }
-    })
-    .then(response => {
-      alert("Novos dados salvos com sucesso!");
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
+  const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNome(event.target.value);
+  };
+
+  const handleCategoriaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCategoria(event.target.value);
+  };
+
+  const handleDataLancamentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDataLancamento(event.target.value);
+  };
+
+  const handleENacionalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setENacional(event.target.checked);
+  };
+
+  const handleSave = async () => {
+    const updatedLivro = {
+      ...livro,
+      nome,
+      categoria,
+      dataLancamento: new Date(dataLancamento),
+      eNacional,
+    };
+
+    try {
+      await api.put(`/Livros/${livro.id}`, updatedLivro);
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <div>
-      <div>
-        <input
-          placeholder={livroAtual.nome}
-          value={novoNome}
-          onChange={(event) => setNovoNome(event.target.value)}
-        />
-        <input
-          placeholder={livroAtual.categoria}
-          value={novoCategoria}
-          onChange={(event) => setNovoCategoria(event.target.value)}
-        />
-        <input 
-          placeholder={livroAtual.dataLancamento}
-          value={novoDataLancamento}
-          onChange={(event) => setNovoDataLancamento(event.target.value)}
-        />
-        <input 
-          placeholder={livroAtual.eNacional ? 'Sim' : 'Não'} 
-          value={novoENacional ? 'Sim' : 'Não'} 
-          onChange={(event) => setNovoENacional(event?.target.value == 'Sim' ? true : false)}
-        />
-      </div>
-      <div>
-        <button>Cancelar</button>
-        <button onClick={handleSaveBookInfo}>Salvar</button>
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2>Editar Livro</h2>
+        <form>
+          <label>
+            Nome:
+            <input type="text" value={nome} onChange={handleNomeChange} />
+          </label>
+          <label>
+            Categoria:
+            <select value={categoria} onChange={() => handleCategoriaChange}>
+              <option value="Ação">Ação</option>
+              <option value="Aventura">Aventura</option>
+              <option value="Biografia">Biografia</option>
+              <option value="Científico">Científico</option>
+              <option value="Comédia">Comédia</option>
+              <option value="Drama">Drama</option>
+              <option value="Fantasia">Fantasia</option>
+              <option value="Ficção Científica">Ficção Científica</option>
+              <option value="História">História</option>
+              <option value="Infantil">Infantil</option>
+              <option value="Literatura">Literatura</option>
+              <option value="Religioso">Religioso</option>
+              <option value="Romance">Romance</option>
+              <option value="Suspense">Suspense</option>
+              <option value="Terror">Terror</option>
+            </select>
+          </label>
+
+          <label>
+            Data de Lançamento:
+            <input type="date" value={dataLancamento.substring(0, 10)} onChange={handleDataLancamentoChange} />
+          </label>
+          <label>
+            Nacional?
+            <input type="checkbox" checked={eNacional} onChange={handleENacionalChange} />
+          </label>
+          <div className="modal-buttons">
+            <button type="button" onClick={onClose}>
+              Cancelar
+            </button>
+            <button type="button" onClick={handleSave}>
+              Salvar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

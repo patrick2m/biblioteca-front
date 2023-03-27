@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
 import './App.css';
 import AdicionarLivro from './components/AdicionarLivro';
-import BotaoDeletar from './components/botaoDeletar';
-import Modal from './components/Modal';
+import ResultadoPesquisa from './components/ResultadoPesquisa';
 import ZerarBanco from './components/ZerarBanco';
 import { api } from './lib/axios';
+
 type Pesquisa = string;
 
 export type Livro = {
@@ -34,35 +34,16 @@ function App() {
   }, [])
 
   function handleForm(event: FormEvent){
+    if (pesquisa == '') return
     event.preventDefault();
-    if (tipoPesquisa == "Nome") {
-      setFiltro(true)
-      api.get(`/Livros/Nome/${pesquisa}`).then(res => {
-        setRespostaPesquisa([res.data])
-      })
-    }
-    if (tipoPesquisa == "Matricula") {
-      setFiltro(true)
-      api.get(`/Livros/Matricula/${pesquisa}`).then(res => {
-        setRespostaPesquisa([res.data])
-      })
-    }
-    if (tipoPesquisa == "Categoria") {
-      setFiltro(true)
-      api.get(`/Livros/Categoria/${pesquisa}`).then(res => {
-        setRespostaPesquisa(res.data)
-      })
-    }
+    setFiltro(true)
     if (tipoPesquisa == "Data") {
-      setFiltro(true)
       const dataFormatada = new Date(pesquisa).toISOString();
       api.get(`/Livros/Data/${dataFormatada}`).then(res => {
         setRespostaPesquisa(res.data)
       })
-    }
-    if (tipoPesquisa == "ENacional") {
-      setFiltro(true)
-      api.get(`/Livros/ENacional/${pesquisa}`).then(res => {
+    } else {
+      api.get(`/Livros/${tipoPesquisa}/${pesquisa}`).then(res => {
         setRespostaPesquisa(res.data)
       })
     }
@@ -73,6 +54,7 @@ function App() {
     setTipoPesquisa('Nome');
     setFiltro(false)
     buscarTodos()
+    setPlaceholder('Nome');
   }
 
   function handleTipoPesquisa(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -107,7 +89,7 @@ function App() {
             <option value="ENacional">Nacional?</option>
           </select>
           {tipoEntradaTexto  ? (
-            <input 
+            <input
               type="text"
               placeholder={placeholder}
               autoFocus
@@ -115,14 +97,14 @@ function App() {
               onChange={event => setPesquisa(event.target.value)}
             />
           ):(
-            <input 
-              type="date" 
-              name="date" 
+            <input
+              type="date"
+              name="date"
               id="date"
               value={pesquisa}
               onChange={event => setPesquisa(event.target.value)}
             />
-          ) }
+          )}
           {filtro ? (
             <button onClick={handleRemoverFiltro}>Remover filtro</button>
           ):(
@@ -132,26 +114,7 @@ function App() {
         </form>
       </div>
       <div>
-        {respostaPesquisa.length > 0 ? (
-          respostaPesquisa.map((livro) => {
-            return (
-              <div 
-                key={livro.id}
-                className="livro"
-              >
-                <p>Matricula : {livro.id}</p>
-                <h2>{livro.nome}</h2>
-                <p>{livro.categoria}</p>
-                <p>Data : <span>{livro.dataLancamento}</span></p>
-                <p>{livro.eNacional? 'Sim' : 'Não'}</p>
-                <button onClick={() => <Modal data={livro} />}>Editar</button>
-                <BotaoDeletar data={livro} />
-              </div>
-            )
-          })
-        ) : (
-          <h1>Não há itens</h1>
-        )}
+        <ResultadoPesquisa livros={respostaPesquisa} onRefresh={() => handleForm} />
       </div>
     </div>
   )
