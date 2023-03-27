@@ -13,21 +13,6 @@ const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
   const [ novoDataLancamento, setNovoDataLancamento ] = useState(livroAtual.dataLancamento)
   const [ novoENacional, setNovoENacional ] = useState(livroAtual.eNacional)
 
-  function handleDeleteButton() {
-    const confirmado = confirmadoAlert();
-    if (confirmado) {
-      api.delete('/deletarlivro', {
-        params: {
-          id: livroAtual.id
-        }
-      })
-    }
-  }
-
-  function confirmadoAlert() {
-    return window.confirm('Deseja realmente excluir o livro?')
-  }
-
   function handleSaveBookInfo(){
     api.patch('/salvarLivro', {
       params: {
@@ -46,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
       console.log(error);
     })
   }
-  
+
   return (
     <div>
       <div>
@@ -72,7 +57,7 @@ const Modal: React.FC<ModalProps> = ({data: livroAtual}) => {
         />
       </div>
       <div>
-        <button onClick={handleDeleteButton}>Deletar Livro</button>
+        <button>Cancelar</button>
         <button onClick={handleSaveBookInfo}>Salvar</button>
       </div>
     </div>

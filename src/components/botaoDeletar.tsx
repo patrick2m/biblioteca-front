@@ -13,7 +13,6 @@ const BotaoDeletar: React.FC<botaoDeletarProps> = ({data: livroAtual}) => {
     
     if (confirmado) {
       api.delete(`/Livros/${livroAtual.id}`).then(response => {
-        console.log(response);
         if (response.status === 204) {
           alert('Livro excluído com sucesso')
         }
