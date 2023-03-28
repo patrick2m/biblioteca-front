@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import './App.css';
 import ResultadoPesquisa from './components/ResultadoPesquisa';
 
+import bibliotecaLogo from './assets/biblioteca-logo.png';
+
 type Pesquisa = string;
 
 export type Livro = {
@@ -55,16 +57,19 @@ function App() {
 
   return (
     <div className="App">
-      <div><h1>Biblioteca Digital</h1></div>
+      <div>
+        <img src={bibliotecaLogo} alt="Logomarca" width={100} />
+        <strong>Biblioteca Digital</strong>
+      </div>
       <div className="header">
         <form onSubmit={handleForm} className="form">
         <select value={tipoPesquisa} onChange={handleTipoPesquisa}>
-            <option value="Nome">Nome</option>
-            <option value="Matricula">Matrícula</option>
-            <option value="Categoria">Categoria</option>
-            <option value="Data">Data</option>
-            <option value="ENacional">Nacional?</option>
-          </select>
+          <option value="Nome">Nome</option>
+          <option value="Matricula">Matrícula</option>
+          <option value="Categoria">Categoria</option>
+          <option value="Data">Data</option>
+          <option value="ENacional">Nacional?</option>
+        </select>
           {tipoPesquisa == "Nome" && 
             <input
               type="text"

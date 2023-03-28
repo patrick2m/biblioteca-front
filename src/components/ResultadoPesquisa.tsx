@@ -4,7 +4,7 @@ import { Livro } from '../App';
 import { api } from '../lib/axios';
 import AdicionarLivro from './AdicionarLivro';
 import BotaoDeletar from './BotaoDeletar';
-import Modal from './Modal';
+import Modal from './ModalEdicao';
 import PopularBanco from './PopularBanco';
 import ZerarBanco from './ZerarBanco';
 
