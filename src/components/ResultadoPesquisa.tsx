@@ -65,6 +65,13 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
       <span><PopularBanco onClose={handleFecharModal}/><ZerarBanco onClose={handleFecharModal}/></span>
       {respostaPesquisa.length > 0 ? (
         respostaPesquisa?.map((livro) => {
+          const dateTime = new Date(livro.dataLancamento);
+
+          const dia = dateTime.getDate().toString().padStart(2, '0');
+          const mes = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+          const ano = dateTime.getFullYear().toString()
+
+          const dataDoLivro = `${dia}/${mes}/${ano}`
           return (
             <div 
               key={livro.id}
@@ -73,7 +80,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
               <p>Matricula : {livro.id}</p>
               <h2>{livro.nome}</h2>
               <p>{livro.categoria}</p>
-              <p>Data : <span>{livro.dataLancamento}</span></p>
+              <p>Data : <span>{dataDoLivro}</span></p>
               <p>{livro.eNacional ? 'Sim' : 'Não'}</p>
               <button onClick={() => handleEditar(livro)}>Editar</button>
               <BotaoDeletar livro={livro} onClose={handleFecharModal} />

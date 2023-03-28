@@ -76,7 +76,7 @@ function App() {
           }
           {tipoPesquisa == "Matricula" && 
             <input
-              type="text"
+              type="number"
               placeholder={placeholder}
               autoFocus
               value={pesquisa}
