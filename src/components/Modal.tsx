@@ -65,6 +65,7 @@ const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
               <option value="Comédia">Comédia</option>
               <option value="Drama">Drama</option>
               <option value="Fantasia">Fantasia</option>
+              <option value="Ficção">Ficção</option>
               <option value="Ficção Científica">Ficção Científica</option>
               <option value="História">História</option>
               <option value="Infantil">Infantil</option>

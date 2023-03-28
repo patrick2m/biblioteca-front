@@ -19,10 +19,12 @@ function App() {
   const [ placeholder, setPlaceholder] = useState('Nome');
   const [ tipoPesquisa, setTipoPesquisa ] = useState('Nome');
   const [ filtro, setFiltro ] = useState(false);
-  const [ tipoEntradaTexto, setTipoEntradaTexto ] = useState(true);
 
   function handleForm(event: FormEvent){
-    if (pesquisa == '') return
+    if (pesquisa == '') {
+      event.preventDefault();
+      return
+    }
     event.preventDefault();
     setFiltro(true)
     setTipoFeito(tipoPesquisa)
@@ -42,16 +44,12 @@ function App() {
     setTipoPesquisa(event.target.value);
     if (event.target.value === 'Data') {
       setPlaceholder('01/01/2023');
-      setTipoEntradaTexto(false);
     } else if (event.target.value === 'Nacional') {
       setPlaceholder('Sim ou Não');
-      setTipoEntradaTexto(true);
     } else if (event.target.value === 'Categoria') {
       setPlaceholder('Drama, Romance, Ficção ...');
-      setTipoEntradaTexto(true);
     } else {
       setPlaceholder(event.target.value);
-      setTipoEntradaTexto(true);
     }
   }
 
@@ -86,13 +84,24 @@ function App() {
             />
           }
           {tipoPesquisa == "Categoria" && 
-            <input
-              type="text"
-              placeholder={placeholder}
-              autoFocus
-              value={pesquisa}
-              onChange={event => setPesquisa(event.target.value)}
-            />
+            <select value={pesquisa} onChange={event => setPesquisa(event.target.value)}>
+              <option value="Ação">Ação</option>
+              <option value="Aventura">Aventura</option>
+              <option value="Biografia">Biografia</option>
+              <option value="Científico">Científico</option>
+              <option value="Comédia">Comédia</option>
+              <option value="Drama">Drama</option>
+              <option value="Fantasia">Fantasia</option>
+              <option value="Ficção">Ficção</option>
+              <option value="Ficção Científica">Ficção Científica</option>
+              <option value="História">História</option>
+              <option value="Infantil">Infantil</option>
+              <option value="Literatura">Literatura</option>
+              <option value="Religioso">Religioso</option>
+              <option value="Romance">Romance</option>
+              <option value="Suspense">Suspense</option>
+              <option value="Terror">Terror</option>
+            </select>
           }
           {tipoPesquisa == "Data" && 
             <input
