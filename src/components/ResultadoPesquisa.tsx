@@ -1,30 +1,70 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Livro } from '../App';
+import { api } from '../lib/axios';
+import AdicionarLivro from './AdicionarLivro';
 import BotaoDeletar from './BotaoDeletar';
 import Modal from './Modal';
+import PopularBanco from './PopularBanco';
+import ZerarBanco from './ZerarBanco';
 
 type ResultadoBuscaProps = {
-  livros: Livro[];
+  tipoBuscado: string;
+  chaveBuscada: string | Date | number;
+  buscaTodos: boolean;
   onRefresh: () => void;
 }
 
-const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ livros, onRefresh }) => {
-  const [livroSelecionado, setLivroSelecionado] = useState<Livro | null>(null);
-
+const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado, chaveBuscada, onRefresh }) => {
+  const [ livroSelecionado, setLivroSelecionado ] = useState<Livro | null>(null);
+  const [ respostaPesquisa,setRespostaPesquisa ] = useState<Livro[]>([]);
   const handleEditar = (livro: Livro) => {
     setLivroSelecionado(livro);
   }
 
   const handleFecharModal = () => {
     setLivroSelecionado(null);
+    if (buscaTodos) {
+      buscarTodos()
+    } else {
+      pesquisar(tipoBuscado, chaveBuscada);
+    }
     onRefresh()
   }
 
+  function buscarTodos() {
+    api.get('/Livros').then(res => {
+      setRespostaPesquisa(res.data)
+    })    
+  }
+
+  function pesquisar(tipoBuscado: string, chaveBuscada: string|number|Date) {
+    if (tipoBuscado == "Data") {
+      const dataFormatada = new Date(chaveBuscada).toISOString();
+      api.get(`/Livros/Data/${dataFormatada}`).then(res => {
+        setRespostaPesquisa(res.data)
+      })
+    } else {
+      api.get(`/Livros/${tipoBuscado}/${chaveBuscada}`).then(res => {
+        setRespostaPesquisa(res.data)
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (buscaTodos  == true) {
+      buscarTodos();
+    } else {
+      pesquisar(tipoBuscado, chaveBuscada)
+    }
+  }, [tipoBuscado, chaveBuscada])
+
   return (
     <div>
-      {livros.length > 0 ? (
-        livros.map((livro) => {
+      <div><AdicionarLivro onClose={handleFecharModal} /></div>
+      <span><PopularBanco onClose={handleFecharModal}/><ZerarBanco onClose={handleFecharModal}/></span>
+      {respostaPesquisa.length > 0 ? (
+        respostaPesquisa?.map((livro) => {
           return (
             <div 
               key={livro.id}
@@ -36,7 +76,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ livros, onRefresh }) =>
               <p>Data : <span>{livro.dataLancamento}</span></p>
               <p>{livro.eNacional ? 'Sim' : 'Não'}</p>
               <button onClick={() => handleEditar(livro)}>Editar</button>
-              <BotaoDeletar livro={livro} />
+              <BotaoDeletar livro={livro} onClose={handleFecharModal} />
             </div>
           )
         })

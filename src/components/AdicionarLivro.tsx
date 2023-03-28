@@ -1,7 +1,11 @@
 import React, { FormEvent, useState } from 'react';
 import { api } from '../lib/axios';
 
-const AdicionarLivro = () => {
+type AdicionarLivroProps = {
+  onClose: () => void;
+}
+
+const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
   const [ Nome, setNome ] = useState<string>('')
   const [ Categoria, setCategoria ] = useState<string>('Ação')
   const [ DataLancamento, setDataLancamento ] = useState<string>('')
@@ -25,6 +29,7 @@ const AdicionarLivro = () => {
       }).then(response => {
         if (response.status === 201) {
           alert('Livro adicionado com sucesso')
+          onClose()
         } else {
           alert('Erro ao adicionar o Livro')
         }

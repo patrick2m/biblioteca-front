@@ -1,14 +1,11 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import './App.css';
-import AdicionarLivro from './components/AdicionarLivro';
 import ResultadoPesquisa from './components/ResultadoPesquisa';
-import ZerarBanco from './components/ZerarBanco';
-import { api } from './lib/axios';
 
 type Pesquisa = string;
 
 export type Livro = {
-  id: number,
+  id?: number,
   nome: string,
   categoria: string,
   dataLancamento: string,
@@ -16,45 +13,29 @@ export type Livro = {
 }
 
 function App() {
-  const [ respostaPesquisa, setRespostaPesquisa ] = useState<Livro[]>([]);
+  const [ tipoFeito, setTipoFeito ] = useState<string>('');
+  const [ pesquisaFeita, setPesquisaFeita ] = useState<string|number|Date>('');
   const [ pesquisa, setPesquisa] = useState<Pesquisa>('');
   const [ placeholder, setPlaceholder] = useState('Nome');
   const [ tipoPesquisa, setTipoPesquisa ] = useState('Nome');
   const [ filtro, setFiltro ] = useState(false);
   const [ tipoEntradaTexto, setTipoEntradaTexto ] = useState(true);
 
-  function buscarTodos() {
-    api.get('/Livros').then(res => {
-      setRespostaPesquisa(res.data)
-    })    
-  }
-
-  useEffect(() => {
-    buscarTodos()
-  }, [])
-
   function handleForm(event: FormEvent){
     if (pesquisa == '') return
     event.preventDefault();
     setFiltro(true)
-    if (tipoPesquisa == "Data") {
-      const dataFormatada = new Date(pesquisa).toISOString();
-      api.get(`/Livros/Data/${dataFormatada}`).then(res => {
-        setRespostaPesquisa(res.data)
-      })
-    } else {
-      api.get(`/Livros/${tipoPesquisa}/${pesquisa}`).then(res => {
-        setRespostaPesquisa(res.data)
-      })
-    }
+    setTipoFeito(tipoPesquisa)
+    setPesquisaFeita(pesquisa)
   }
 
   function handleRemoverFiltro(){
     setPesquisa('');
     setTipoPesquisa('Nome');
     setFiltro(false)
-    buscarTodos()
     setPlaceholder('Nome');
+    setTipoFeito('BuscaTodos')
+    setPesquisaFeita('')
   }
 
   function handleTipoPesquisa(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -77,8 +58,6 @@ function App() {
   return (
     <div className="App">
       <div><h1>Biblioteca Digital</h1></div>
-      <div><AdicionarLivro /></div>
-      <div><ZerarBanco/></div>
       <div className="header">
         <form onSubmit={handleForm} className="form">
         <select value={tipoPesquisa} onChange={handleTipoPesquisa}>
@@ -88,7 +67,7 @@ function App() {
             <option value="Data">Data</option>
             <option value="ENacional">Nacional?</option>
           </select>
-          {tipoEntradaTexto  ? (
+          {tipoPesquisa == "Nome" && 
             <input
               type="text"
               placeholder={placeholder}
@@ -96,15 +75,44 @@ function App() {
               value={pesquisa}
               onChange={event => setPesquisa(event.target.value)}
             />
-          ):(
+          }
+          {tipoPesquisa == "Matricula" && 
+            <input
+              type="text"
+              placeholder={placeholder}
+              autoFocus
+              value={pesquisa}
+              onChange={event => setPesquisa(event.target.value)}
+            />
+          }
+          {tipoPesquisa == "Categoria" && 
+            <input
+              type="text"
+              placeholder={placeholder}
+              autoFocus
+              value={pesquisa}
+              onChange={event => setPesquisa(event.target.value)}
+            />
+          }
+          {tipoPesquisa == "Data" && 
             <input
               type="date"
               name="date"
               id="date"
+              autoFocus
               value={pesquisa}
               onChange={event => setPesquisa(event.target.value)}
             />
-          )}
+          }
+          {tipoPesquisa == "ENacional" && 
+            <input
+              type="text"
+              placeholder={placeholder}
+              autoFocus
+              value={pesquisa}
+              onChange={event => setPesquisa(event.target.value)}
+            />
+          }
           {filtro ? (
             <button onClick={handleRemoverFiltro}>Remover filtro</button>
           ):(
@@ -114,7 +122,7 @@ function App() {
         </form>
       </div>
       <div>
-        <ResultadoPesquisa livros={respostaPesquisa} onRefresh={() => handleForm} />
+        <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
       </div>
     </div>
   )

@@ -3,10 +3,11 @@ import { Livro } from '../App';
 import { api } from '../lib/axios';
 
 type botaoDeletarProps = {
-  livro: Livro
+  onClose: () => void;
+  livro: Livro;
 }
 
-const BotaoDeletar: React.FC<botaoDeletarProps> = ({livro: livroAtual}) => {
+const BotaoDeletar: React.FC<botaoDeletarProps> = ({livro: livroAtual, onClose}) => {
 
   function handleDeleteButton(){
     const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${livroAtual.nome}, Categoria : ${livroAtual.categoria}, DataLancamento : ${livroAtual.dataLancamento}, É Nacional : ${livroAtual.eNacional}`);
