@@ -29,7 +29,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
 
   const handleAdicionarLivro = () => {
     setAdicionarLivro(true);
-    console.log(adicionarLivro)
+    setQuantidadeMostrada(10)
   }
 
   const handleFecharModal = () => {
@@ -40,6 +40,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
       pesquisar(tipoBuscado, chaveBuscada);
     }
     onRefresh()
+    setQuantidadeMostrada(10)
   }
 
   const handleFecharAdicionar = () => {
@@ -49,12 +50,14 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
     } else {
       pesquisar(tipoBuscado, chaveBuscada);
     }
+    setQuantidadeMostrada(10)
   }
 
   function buscarTodos() {
     api.get('/Livros').then(res => {
       setRespostaPesquisa(res.data)
-    })    
+    })
+    setQuantidadeMostrada(10)
   }
 
   function pesquisar(tipoBuscado: string, chaveBuscada: string|number|Date) {
@@ -68,6 +71,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
         setRespostaPesquisa(res.data)
       })
     }
+    setQuantidadeMostrada(10)
   }
 
   useEffect(() => {
@@ -99,6 +103,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
           <p>Categoria</p>
           <p>Data de Lançamento</p>
           <p>É Nacional?</p>
+          <p>Autor</p>
           <p>Editar</p>
           <p>Excluir</p>
         </div>
@@ -124,6 +129,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
                   <p className='livro-categoria'>{livro.categoria}</p>
                   <p className='livro-data'>{dataDoLivro}</p>
                   <p className='livro-enacional'>{livro.eNacional ? 'Sim' : 'Não'}</p>
+                  <p className='livro-autor'>{livro.autor}</p>
                   <button className='livro-botao-editar' onClick={() => handleEditar(livro)}>Editar</button>
                   <DeletarLivro livro={livro} onClose={handleFecharModal} />
                 </div>

@@ -11,6 +11,7 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
   const [ Categoria, setCategoria ] = useState<string>('Ação')
   const [ DataLancamento, setDataLancamento ] = useState<string>('')
   const [ ENacional, setENacional ] = useState<boolean>(false)
+  const [ Autor, setAutor ] = useState<string>('')
 
   function handleAdicionar(){
     if (DataLancamento == '') {
@@ -25,7 +26,8 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
         nome: Nome,
         categoria: Categoria,
         dataLancamento: new Date(DataLancamento).toISOString(),
-        eNacional: ENacional
+        eNacional: ENacional,
+        autor: Autor
       }).then(response => {
         if (response.status === 201) {
           alert('Livro adicionado com sucesso')
@@ -80,6 +82,11 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
 
           <label htmlFor="ENacional">
             É Nacional?<input type="checkbox" name="eNacional" checked={ENacional} onChange={event => setENacional(event.target.checked)}/>
+          </label>
+
+          <label htmlFor="Autor">
+            Autor : 
+            <input type="text" value={Autor} onChange={event => setAutor(event.target.value)}/>
           </label>
 
           <div className='adicionar-botoes'>

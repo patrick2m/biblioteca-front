@@ -11,7 +11,8 @@ export type Livro = {
   nome: string,
   categoria: string,
   dataLancamento: string,
-  eNacional: boolean
+  eNacional: boolean,
+  autor: string
 }
 
 function App() {
@@ -23,14 +24,14 @@ function App() {
   const [ filtro, setFiltro ] = useState(false);
 
   function handleForm(event: FormEvent){
-    if (pesquisa == '') {
-      event.preventDefault();
-      return
-    }
     event.preventDefault();
-    setFiltro(true)
-    setTipoFeito(tipoPesquisa)
-    setPesquisaFeita(pesquisa)
+    if (pesquisa == '') {
+      handleRemoverFiltro()
+    } else {
+      setFiltro(true)
+      setTipoFeito(tipoPesquisa)
+      setPesquisaFeita(pesquisa)
+    }
   }
 
   function handleRemoverFiltro(){
@@ -58,7 +59,7 @@ function App() {
   return (
     <div className="biblioteca-container">
       <div className='biblioteca-header'>
-        <div className='biblioteca-logo'>
+        <div onClick={handleRemoverFiltro} className='biblioteca-logo'>
           <img src={bibliotecaLogo} alt="Logomarca" width={100} />
           <strong>Minha Biblioteca</strong>
         </div>
@@ -71,26 +72,32 @@ function App() {
                 <option value="Categoria">Categoria</option>
                 <option value="Data">Data</option>
                 <option value="ENacional">Nacional?</option>
+                <option value="Autor">Autor</option>
               </select>
             </label>
             <label htmlFor="Campo de Inserção">
               {tipoPesquisa == "Nome" && 
+              <button className='botao-entrada-pesquisa'>
                 <input
-                type="text"
-                placeholder={placeholder}
-                autoFocus
-                value={pesquisa}
-                onChange={event => setPesquisa(event.target.value)}
+                  type="text"
+                  placeholder={placeholder}
+                  autoFocus
+                  value={pesquisa}
+                  onChange={event => setPesquisa(event.target.value)}
+                  onSubmit={handleForm}
                 />
+              </button>
               }
               {tipoPesquisa == "Matricula" && 
+              <button className='botao-entrada-pesquisa'>
                 <input
-                type="number"
-                placeholder={placeholder}
-                autoFocus
-                value={pesquisa}
-                onChange={event => setPesquisa(event.target.value)}
+                  type="number"
+                  placeholder={placeholder}
+                  autoFocus
+                  value={pesquisa}
+                  onChange={event => setPesquisa(event.target.value)}
                 />
+              </button>
               }
               {tipoPesquisa == "Categoria" && 
                 <select value={pesquisa} onChange={event => setPesquisa(event.target.value)}>
@@ -113,14 +120,16 @@ function App() {
                 </select>
               }
               {tipoPesquisa == "Data" && 
-                <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  autoFocus
-                  value={pesquisa}
-                  onChange={event => setPesquisa(event.target.value)}
-                />
+                <button className='botao-entrada-pesquisa'>
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    autoFocus
+                    value={pesquisa}
+                    onChange={event => setPesquisa(event.target.value)}
+                  />
+                </button>
               }
               {tipoPesquisa == "ENacional" && 
                 <input
@@ -130,6 +139,17 @@ function App() {
                   value={pesquisa}
                   onChange={event => setPesquisa(event.target.value)}
                 />
+              }
+              {tipoPesquisa == "Autor" && 
+                <button className='botao-entrada-pesquisa'>
+                  <input
+                    type="text"
+                    placeholder={placeholder}
+                    autoFocus
+                    value={pesquisa}
+                    onChange={event => setPesquisa(event.target.value)}
+                  />
+                </button>
               }
             </label>
             {filtro ? (

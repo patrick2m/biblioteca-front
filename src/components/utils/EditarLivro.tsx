@@ -13,6 +13,7 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
   const [categoria, setCategoria] = useState(livro.categoria);
   const [dataLancamento, setDataLancamento] = useState(livro.dataLancamento);
   const [eNacional, setENacional] = useState(livro.eNacional);
+  const [autor, setAutor] = useState(livro.autor);
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNome(event.target.value);
@@ -30,6 +31,10 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
     setENacional(event.target.checked);
   };
 
+  const handleAutorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAutor(event.target.value);
+  };
+
   const handleSave = async () => {
     const updatedLivro = {
       ...livro,
@@ -37,6 +42,7 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
       categoria,
       dataLancamento: new Date(dataLancamento),
       eNacional,
+      autor,
     };
 
     try {
@@ -96,6 +102,11 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
           <label htmlFor='ENacional'>
             É Nacional?
             <input type="checkbox" checked={eNacional} onChange={handleENacionalChange} />
+          </label>
+
+          <label htmlFor='Autor'>
+            Autor:
+            <input type="text" value={autor} autoFocus onChange={handleAutorChange} />
           </label>
           
           <div className="editar-botoes">

@@ -41,7 +41,8 @@
 .livro-categoria,
 .livro-data,
 .livro-enacional,
-.livro-botao-editar{
+.livro-botao-editar,
+.livro-autor{
   padding: 0 20px;
   border-right: 1px solid;
   width: 110px;
