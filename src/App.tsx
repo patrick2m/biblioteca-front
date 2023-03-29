@@ -60,7 +60,7 @@ function App() {
       <div className='biblioteca-header'>
         <div className='biblioteca-logo'>
           <img src={bibliotecaLogo} alt="Logomarca" width={100} />
-          <strong>Biblioteca Digital</strong>
+          <strong>Minha Biblioteca</strong>
         </div>
         <div className="biblioteca-filtro">
           <form onSubmit={handleForm} className="biblioteca-formulario">
@@ -140,9 +140,9 @@ function App() {
           <button>Pesquisar</button>
           </form>
         </div>
-        <div className='biblioteca-content'>
-          <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
-        </div>
+      </div>
+      <div className='biblioteca-content'>
+        <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
       </div>
     </div>
   )

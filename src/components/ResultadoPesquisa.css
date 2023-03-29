@@ -7,11 +7,14 @@
 .resultado-header{
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 .resultado-cabecalho{
   display: flex;
   flex-direction: row;  
   align-items: center;
+  color: black;
+  gap: 60px;
 }
 .resultado-utils{
   display: flex;
@@ -19,7 +22,7 @@
   margin-bottom: 20px;
 }
 .resultado-lista{
-  max-width: 80%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -30,4 +33,33 @@
   display: flex;
   flex-direction: row;
   color: black;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+.livro-matricula,
+.livro-nome,
+.livro-categoria,
+.livro-data,
+.livro-enacional,
+.livro-botao-editar{
+  padding: 0 20px;
+  border-right: 1px solid;
+  width: 110px;
+
+}
+.livro-nome{
+  font-size: 12px;
+}
+.livro-matricula {
+  width: 50px;
+}
+
+.livro-botao-editar{
+  align-items: center;
+  width: 80px;
+  height: 40px;
+  border-radius: 8%;
+  background-color: cyan;
+  color: black;
+  cursor: pointer;
 }

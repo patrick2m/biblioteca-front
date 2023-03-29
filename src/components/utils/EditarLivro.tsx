@@ -4,8 +4,8 @@ import { api } from '../../lib/axios';
 import './EditarLivro.css';
 
 type EditarLivroProps = {
-  livro: Livro;
   onClose: () => void;
+  livro: Livro;
 };
 
 const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {

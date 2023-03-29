@@ -8,8 +8,16 @@
 }
 .biblioteca-header{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px 100px;
+}
+.biblioteca-logo{
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  color: black;
 }
 .form{
   display: flex;
