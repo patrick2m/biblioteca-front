@@ -1,13 +1,14 @@
 import React from 'react'
-import { Livro } from '../App';
-import { api } from '../lib/axios';
+import { Livro } from '../../App';
+import { api } from '../../lib/axios';
+import "./DeletarLivro.css"
 
-type botaoDeletarProps = {
+type DeletarLivroProps = {
   onClose: () => void;
   livro: Livro;
 }
 
-const BotaoDeletar: React.FC<botaoDeletarProps> = ({livro: livroAtual, onClose}) => {
+const DeletarLivro: React.FC<DeletarLivroProps> = ({livro: livroAtual, onClose}) => {
 
   function handleDeleteButton(){
     const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${livroAtual.nome}, Categoria : ${livroAtual.categoria}, DataLancamento : ${livroAtual.dataLancamento}, É Nacional : ${livroAtual.eNacional}`);
@@ -24,8 +25,8 @@ const BotaoDeletar: React.FC<botaoDeletarProps> = ({livro: livroAtual, onClose})
   }
 
   return (
-    <button onClick={handleDeleteButton}>Excluir Livro</button>
+    <button className='deletar-livro' onClick={handleDeleteButton}>Excluir Livro</button>
   )
 }
 
-export default BotaoDeletar;
+export default DeletarLivro;

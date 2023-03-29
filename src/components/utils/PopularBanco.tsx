@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Livro } from '../App';
-import { api } from '../lib/axios';
+import { Livro } from '../../App';
+import { api } from '../../lib/axios';
 
 type PopularBancoProps = {
   onClose: () => void;
@@ -99,12 +99,16 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
   }, [])
 
   function adicionarLivros(){
-    api.post('/PopularBanco', livros).then(response => {
-      alert('Livros adicionados com sucesso!')
-      onClose();
-    }).catch(error => {
-      console.error('Erro ao adicionar livros:', error);
-    });
+    const confirmado = window.confirm(`Deseja realmente popular o banco de dados com livros?`);
+    
+    if (confirmado) {
+      api.post('/PopularBanco', livros).then(response => {
+        alert('Livros adicionados com sucesso!')
+        onClose();
+      }).catch(error => {
+        console.log('Erro ao adicionar livros:', error);
+      });
+    }
   }
 
   return (

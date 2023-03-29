@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Livro } from '../App';
-import { api } from '../lib/axios';
+import { Livro } from '../../App';
+import { api } from '../../lib/axios';
+import './EditarLivro.css';
 
-type ModalProps = {
+type EditarLivroProps = {
   livro: Livro;
   onClose: () => void;
 };
 
-const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
+const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
   const [nome, setNome] = useState(livro.nome);
   const [categoria, setCategoria] = useState(livro.categoria);
   const [dataLancamento, setDataLancamento] = useState(livro.dataLancamento);
@@ -17,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
     setNome(event.target.value);
   };
 
-  const handleCategoriaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCategoriaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoria(event.target.value);
   };
 
@@ -47,17 +48,27 @@ const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h2>Editar Livro</h2>
-        <form>
-          <label>
+    <div className="editar-overlay">
+      <div className="editar-container">
+        <div className='editar-header'>
+          <h1>Editar Livro</h1>
+          <div className='livro-id'>
+            Matrícula :
+            <div className='numero-id'>
+              {livro.id}
+            </div>
+          </div>
+        </div>
+        <form className='editar-formulario'>
+
+          <label htmlFor='Nome'>
             Nome:
-            <input type="text" value={nome} onChange={handleNomeChange} />
+            <input type="text" value={nome} autoFocus onChange={handleNomeChange} />
           </label>
-          <label>
+
+          <label htmlFor='Categoria'>
             Categoria:
-            <select value={categoria} onChange={() => handleCategoriaChange}>
+            <select value={categoria} onChange={(event) => handleCategoriaChange(event)}>
               <option value="Ação">Ação</option>
               <option value="Aventura">Aventura</option>
               <option value="Biografia">Biografia</option>
@@ -77,15 +88,17 @@ const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
             </select>
           </label>
 
-          <label>
+          <label htmlFor='DataLancamento'>
             Data de Lançamento:
             <input type="date" value={dataLancamento.substring(0, 10)} onChange={handleDataLancamentoChange} />
           </label>
-          <label>
-            Nacional?
+
+          <label htmlFor='ENacional'>
+            É Nacional?
             <input type="checkbox" checked={eNacional} onChange={handleENacionalChange} />
           </label>
-          <div className="modal-buttons">
+          
+          <div className="editar-botoes">
             <button type="button" onClick={onClose}>
               Cancelar
             </button>
@@ -99,4 +112,4 @@ const Modal: React.FC<ModalProps> = ({ livro, onClose }) => {
   );
 };
 
-export default Modal;
+export default EditarLivro;

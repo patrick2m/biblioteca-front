@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { Livro } from '../App';
 import { api } from '../lib/axios';
-import AdicionarLivro from './AdicionarLivro';
-import BotaoDeletar from './BotaoDeletar';
-import Modal from './ModalEdicao';
-import PopularBanco from './PopularBanco';
-import ZerarBanco from './ZerarBanco';
+import './ResultadoPesquisa.css';
+import AdicionarLivro from './utils/AdicionarLivro';
+import DeletarLivro from './utils/DeletarLivro';
+import EditarLivro from './utils/EditarLivro';
+import PopularBanco from './utils/PopularBanco';
+import ZerarBanco from './utils/ZerarBanco';
 
 type ResultadoBuscaProps = {
   tipoBuscado: string;
@@ -18,8 +19,15 @@ type ResultadoBuscaProps = {
 const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado, chaveBuscada, onRefresh }) => {
   const [ livroSelecionado, setLivroSelecionado ] = useState<Livro | null>(null);
   const [ respostaPesquisa,setRespostaPesquisa ] = useState<Livro[]>([]);
+  const [ adicionarLivro, setAdicionarLivro ] = useState<boolean>(false);
+
   const handleEditar = (livro: Livro) => {
     setLivroSelecionado(livro);
+  }
+
+  const handleAdicionarLivro = () => {
+    setAdicionarLivro(true);
+    console.log(adicionarLivro)
   }
 
   const handleFecharModal = () => {
@@ -30,6 +38,15 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
       pesquisar(tipoBuscado, chaveBuscada);
     }
     onRefresh()
+  }
+
+  const handleFecharAdicionar = () => {
+    setAdicionarLivro(false)
+    if (buscaTodos) {
+      buscarTodos()
+    } else {
+      pesquisar(tipoBuscado, chaveBuscada);
+    }
   }
 
   function buscarTodos() {
@@ -60,38 +77,54 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
   }, [tipoBuscado, chaveBuscada])
 
   return (
-    <div>
-      <div><AdicionarLivro onClose={handleFecharModal} /></div>
-      <span><PopularBanco onClose={handleFecharModal}/><ZerarBanco onClose={handleFecharModal}/></span>
-      {respostaPesquisa.length > 0 ? (
-        respostaPesquisa?.map((livro) => {
-          const dateTime = new Date(livro.dataLancamento);
+    <div className='resultado-container'>
+      <div className='resultado-header'>
+        <div className='resultado-utils'>
+          <button onClick={handleAdicionarLivro}>Adicionar Livro</button>
+          <span><PopularBanco onClose={handleFecharModal}/><ZerarBanco onClose={handleFecharModal}/></span>
+        </div>
+        <div className='resultado-cabecalho'>
+          <p>Matrícula</p>
+          <p>Nome</p>
+          <p>Categoria</p>
+          <p>Data de Lançamento</p>
+          <p>É Nacional?</p>
+        </div>
+      </div>
+      <div className='resultado-lista'>
+        {respostaPesquisa.length > 0 ? (
+          respostaPesquisa?.map((livro) => {
+            const dateTime = new Date(livro.dataLancamento);
 
-          const dia = dateTime.getDate().toString().padStart(2, '0');
-          const mes = (dateTime.getMonth() + 1).toString().padStart(2, '0');
-          const ano = dateTime.getFullYear().toString()
+            const dia = dateTime.getDate().toString().padStart(2, '0');
+            const mes = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+            const ano = dateTime.getFullYear().toString()
 
-          const dataDoLivro = `${dia}/${mes}/${ano}`
-          return (
-            <div 
-              key={livro.id}
-              className="livro"
-            >
-              <p>Matricula : {livro.id}</p>
-              <h2>{livro.nome}</h2>
-              <p>{livro.categoria}</p>
-              <p>Data : <span>{dataDoLivro}</span></p>
-              <p>{livro.eNacional ? 'Sim' : 'Não'}</p>
-              <button onClick={() => handleEditar(livro)}>Editar</button>
-              <BotaoDeletar livro={livro} onClose={handleFecharModal} />
-            </div>
-          )
-        })
-      ) : (
-        <h1>Não há itens</h1>
-      )}
+            const dataDoLivro = `${dia}/${mes}/${ano}`
+            return (
+              <div 
+                key={livro.id}
+                className="livro"
+              >
+                <p className='livro-matricula'>{livro.id}</p>
+                <h2 className='livro-nome'>{livro.nome}</h2>
+                <p className='livro-categoria'>{livro.categoria}</p>
+                <p className='livro-data'>{dataDoLivro}</p>
+                <p className='livro-enacional'>{livro.eNacional ? 'Sim' : 'Não'}</p>
+                <button onClick={() => handleEditar(livro)}>Editar</button>
+                <DeletarLivro  livro={livro} onClose={handleFecharModal} />
+              </div>
+            )
+          })
+        ) : (
+          <h1>Não há livros com estes parâmetros</h1>
+        )}
+      </div>
       {livroSelecionado && (
-        <Modal livro={livroSelecionado} onClose={handleFecharModal} />
+        <EditarLivro livro={livroSelecionado} onClose={handleFecharModal} />
+      )}
+      {adicionarLivro && (
+        <AdicionarLivro onClose={handleFecharAdicionar} />
       )}
     </div>
   )

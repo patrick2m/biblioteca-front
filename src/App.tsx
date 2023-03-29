@@ -56,87 +56,93 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div>
-        <img src={bibliotecaLogo} alt="Logomarca" width={100} />
-        <strong>Biblioteca Digital</strong>
-      </div>
-      <div className="header">
-        <form onSubmit={handleForm} className="form">
-        <select value={tipoPesquisa} onChange={handleTipoPesquisa}>
-          <option value="Nome">Nome</option>
-          <option value="Matricula">Matrícula</option>
-          <option value="Categoria">Categoria</option>
-          <option value="Data">Data</option>
-          <option value="ENacional">Nacional?</option>
-        </select>
-          {tipoPesquisa == "Nome" && 
-            <input
-              type="text"
-              placeholder={placeholder}
-              autoFocus
-              value={pesquisa}
-              onChange={event => setPesquisa(event.target.value)}
-            />
-          }
-          {tipoPesquisa == "Matricula" && 
-            <input
-              type="number"
-              placeholder={placeholder}
-              autoFocus
-              value={pesquisa}
-              onChange={event => setPesquisa(event.target.value)}
-            />
-          }
-          {tipoPesquisa == "Categoria" && 
-            <select value={pesquisa} onChange={event => setPesquisa(event.target.value)}>
-              <option value="Ação">Ação</option>
-              <option value="Aventura">Aventura</option>
-              <option value="Biografia">Biografia</option>
-              <option value="Científico">Científico</option>
-              <option value="Comédia">Comédia</option>
-              <option value="Drama">Drama</option>
-              <option value="Fantasia">Fantasia</option>
-              <option value="Ficção">Ficção</option>
-              <option value="Ficção Científica">Ficção Científica</option>
-              <option value="História">História</option>
-              <option value="Infantil">Infantil</option>
-              <option value="Literatura">Literatura</option>
-              <option value="Religioso">Religioso</option>
-              <option value="Romance">Romance</option>
-              <option value="Suspense">Suspense</option>
-              <option value="Terror">Terror</option>
-            </select>
-          }
-          {tipoPesquisa == "Data" && 
-            <input
-              type="date"
-              name="date"
-              id="date"
-              autoFocus
-              value={pesquisa}
-              onChange={event => setPesquisa(event.target.value)}
-            />
-          }
-          {tipoPesquisa == "ENacional" && 
-            <input
-              type="text"
-              placeholder={placeholder}
-              autoFocus
-              value={pesquisa}
-              onChange={event => setPesquisa(event.target.value)}
-            />
-          }
-          {filtro ? (
-            <button onClick={handleRemoverFiltro}>Remover filtro</button>
-          ):(
-            <button disabled onClick={handleRemoverFiltro}>Remover filtro</button>
-          )}
-        <button>Pesquisar</button>
-        </form>
-      </div>
-      <div>
-        <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
+    <div className="biblioteca-container">
+      <div className='biblioteca-header'>
+        <div className='biblioteca-logo'>
+          <img src={bibliotecaLogo} alt="Logomarca" width={100} />
+          <strong>Biblioteca Digital</strong>
+        </div>
+        <div className="biblioteca-filtro">
+          <form onSubmit={handleForm} className="biblioteca-formulario">
+            <label htmlFor="Tipo de Pesquisa">
+              <select value={tipoPesquisa} onChange={handleTipoPesquisa}>
+                <option value="Nome">Nome</option>
+                <option value="Matricula">Matrícula</option>
+                <option value="Categoria">Categoria</option>
+                <option value="Data">Data</option>
+                <option value="ENacional">Nacional?</option>
+              </select>
+            </label>
+            <label htmlFor="Campo de Inserção">
+              {tipoPesquisa == "Nome" && 
+                <input
+                type="text"
+                placeholder={placeholder}
+                autoFocus
+                value={pesquisa}
+                onChange={event => setPesquisa(event.target.value)}
+                />
+              }
+              {tipoPesquisa == "Matricula" && 
+                <input
+                type="number"
+                placeholder={placeholder}
+                autoFocus
+                value={pesquisa}
+                onChange={event => setPesquisa(event.target.value)}
+                />
+              }
+              {tipoPesquisa == "Categoria" && 
+                <select value={pesquisa} onChange={event => setPesquisa(event.target.value)}>
+                  <option value="Ação">Ação</option>
+                  <option value="Aventura">Aventura</option>
+                  <option value="Biografia">Biografia</option>
+                  <option value="Científico">Científico</option>
+                  <option value="Comédia">Comédia</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Fantasia">Fantasia</option>
+                  <option value="Ficção">Ficção</option>
+                  <option value="Ficção Científica">Ficção Científica</option>
+                  <option value="História">História</option>
+                  <option value="Infantil">Infantil</option>
+                  <option value="Literatura">Literatura</option>
+                  <option value="Religioso">Religioso</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Suspense">Suspense</option>
+                  <option value="Terror">Terror</option>
+                </select>
+              }
+              {tipoPesquisa == "Data" && 
+                <input
+                  type="date"
+                  name="date"
+                  id="date"
+                  autoFocus
+                  value={pesquisa}
+                  onChange={event => setPesquisa(event.target.value)}
+                />
+              }
+              {tipoPesquisa == "ENacional" && 
+                <input
+                  type="text"
+                  placeholder={placeholder}
+                  autoFocus
+                  value={pesquisa}
+                  onChange={event => setPesquisa(event.target.value)}
+                />
+              }
+            </label>
+            {filtro ? (
+              <button onClick={handleRemoverFiltro}>Remover filtro</button>
+            ):(
+              <button disabled onClick={handleRemoverFiltro}>Remover filtro</button>
+            )}
+          <button>Pesquisar</button>
+          </form>
+        </div>
+        <div className='biblioteca-content'>
+          <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
+        </div>
       </div>
     </div>
   )

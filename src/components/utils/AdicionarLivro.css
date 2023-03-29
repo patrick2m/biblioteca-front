@@ -1,0 +1,98 @@
+.adicionar-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.adicionar-container {
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.adicionar h1 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.adicionar-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.livro-id{
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.numero-id{
+  width: 80px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 7%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.adicionar-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adicionar-formulario label {
+  display: flex;
+  color: black;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.adicionar-formulario input,
+.adicionar-formulario select,
+.adicionar-formulario button {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.adicionar-formulario input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.adicionar-formulario select {
+  width: 100%;
+}
+
+.adicionar-botoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.adicionar-botoes button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.adicionar-botoes button:hover {
+  background-color: #0062cc;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { api } from '../lib/axios'
+import { api } from '../../lib/axios'
 
 type ZerarBancoProps = {
   onClose: () => void;

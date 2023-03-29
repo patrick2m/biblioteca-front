@@ -1,0 +1,33 @@
+.resultado-container{
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.resultado-header{
+  display: flex;
+  flex-direction: column;
+}
+.resultado-cabecalho{
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+}
+.resultado-utils{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.resultado-lista{
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.livro{
+  display: flex;
+  flex-direction: row;
+  color: black;
+}
