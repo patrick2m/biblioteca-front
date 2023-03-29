@@ -20,6 +20,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
   const [ livroSelecionado, setLivroSelecionado ] = useState<Livro | null>(null);
   const [ respostaPesquisa,setRespostaPesquisa ] = useState<Livro[]>([]);
   const [ adicionarLivro, setAdicionarLivro ] = useState<boolean>(false);
+  const [ quantidadeMostrada, setQuantidadeMostrada ] = useState<number>(10);
 
   const handleEditar = (livro: Livro) => {
     setLivroSelecionado(livro);
@@ -93,7 +94,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
       </div>
       <div className='resultado-lista'>
         {respostaPesquisa.length > 0 ? (
-          respostaPesquisa?.map((livro) => {
+          respostaPesquisa.slice(0, quantidadeMostrada).map((livro) => {
             const dateTime = new Date(livro.dataLancamento);
 
             const dia = dateTime.getDate().toString().padStart(2, '0');
@@ -119,6 +120,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
         ) : (
           <h1>Não há livros com estes parâmetros</h1>
         )}
+        <button onClick={() => setQuantidadeMostrada(quantidadeMostrada + 10)}>Ver Mais +</button>
       </div>
       {livroSelecionado && (
         <EditarLivro livro={livroSelecionado} onClose={handleFecharModal} />
