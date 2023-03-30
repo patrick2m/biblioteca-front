@@ -13,7 +13,7 @@ type DeletarLivroProps = {
 const DeletarLivro: React.FC<DeletarLivroProps> = ({livro: livroAtual, onClose}) => {
 
   function handleDeleteButton(){
-    const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${livroAtual.nome}, Categoria : ${livroAtual.categoria}, DataLancamento : ${livroAtual.dataLancamento}, É Nacional : ${livroAtual.eNacional}`);
+    const confirmado = window.confirm(`Deseja realmente excluir o livro ${livroAtual.nome}`);
     
     if (confirmado) {
       api.delete(`/Livros/${livroAtual.id}`).then(response => {

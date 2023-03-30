@@ -13,18 +13,19 @@
 }
 
 .adicionar-container {
-  width: 80%;
+  width: 100%;
   max-width: 600px;
-  background-color: rgba(241, 228, 207, 1);
+  background-color: #E2CDAD;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  
+  justify-content: center;
 }
 
-.adicionar h1 {
-  font-size: 24px;
-  margin-top: 0;
+.adicionar-container h1 {
+  font-size: 32px;
+  margin: 10px auto;
+  color: #995C02;
 }
 
 .adicionar-header{
@@ -60,9 +61,8 @@
   font-size: 16px;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #995C02;
   border-radius: 70px;
-  background-color: rgba(153, 92, 2,0.5);
 }
 
 .adicionar-formulario select {

@@ -29,12 +29,17 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
       autor,
     };
 
-    try {
-      await api.put(`/Livros/${livro.id}`, updatedLivro);
-      onClose();
-    } catch (error) {
-      console.error(error);
+    const confirmado = window.confirm(`Deseja realmente editar o livro ${nome}?`);
+
+    if (confirmado) {
+      try {
+        await api.put(`/Livros/${livro.id}`, updatedLivro);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     }
+
   };
 
   return (

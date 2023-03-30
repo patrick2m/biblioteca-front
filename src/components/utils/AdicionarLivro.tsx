@@ -25,7 +25,7 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
       return
     }
 
-    const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${Nome}, Categoria : ${Categoria}, Data de Lançamento : ${DataLancamento}, É Nacional : ${ENacional}, Autor: ${Autor}`);
+    const confirmado = window.confirm(`Deseja realmente adicionar o livro ${Nome}?`);
 
     if (confirmado) {
       api.post('/Livros', {
