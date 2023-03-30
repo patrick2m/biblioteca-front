@@ -1,0 +1,31 @@
+.botao-voltaraotopo {
+  position: fixed;
+  bottom: 80px;
+  right: 2%;
+  background-color: rgba(153, 92, 2,0.1);
+  color: black;
+  padding: 8px;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+  transition:  0.2s ease-in-out;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+}
+.botao-voltaraotopo img {
+  width: 15px;
+  height: 15px;
+}
+
+.botao-voltaraotopo:hover {
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  
+}
+.botao-voltaraotopo:hover img {
+  width: 20px;
+  height: 20px;
+}

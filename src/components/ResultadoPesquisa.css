@@ -35,13 +35,15 @@
   padding: 10px;
 
   height: 24px;
-  background-color: rgba(223, 182, 121, 0.5);
+  background-color: rgba(223, 182, 121, 1);
   border: 1px solid #995C02;
   border-radius: 70px;
   color: rgba(0, 0, 0, 0.7);
   font-size: 16px;
   padding-left: 32px;
   padding-right: 32px;
+  position: sticky;
+  top: 0;
 }
 
 .livro{

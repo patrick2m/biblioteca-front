@@ -4,6 +4,7 @@ import ResultadoPesquisa from './components/ResultadoPesquisa';
 
 import bibliotecaLogo from './assets/biblioteca-logo.png';
 import lupa from './assets/lupa.svg';
+import BotaoVoltarAoTopo from './components/utils/BotaoVoltarAoTopo';
 
 type Pesquisa = string;
 
@@ -175,6 +176,7 @@ function App() {
       <div className='biblioteca-content'>
         <ResultadoPesquisa buscaTodos={!filtro} tipoBuscado={tipoFeito} chaveBuscada={pesquisaFeita} onRefresh={() => handleForm} />
       </div>
+      <BotaoVoltarAoTopo />
     </div>
   )
 }
