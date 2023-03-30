@@ -1,8 +1,7 @@
 .deletar-livro {
-  background-color: red;
-  width: 70px;
-  height: 40px;
-  border-radius: 10%;
-  color: white;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  padding-right: 10px;
   cursor: pointer;
 }

@@ -9,6 +9,9 @@ import EditarLivro from './utils/EditarLivro';
 import PopularBanco from './utils/PopularBanco';
 import ZerarBanco from './utils/ZerarBanco';
 
+import iconeEditar from '../assets/iconEditar.svg';
+
+
 type ResultadoBuscaProps = {
   tipoBuscado: string;
   chaveBuscada: string | Date | number;
@@ -101,11 +104,10 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
           <p>Matrícula</p>
           <p>Nome</p>
           <p>Categoria</p>
-          <p>Data de Lançamento</p>
-          <p>É Nacional?</p>
+          <p>Publicação</p>
+          <p>Origem</p>
           <p>Autor</p>
-          <p>Editar</p>
-          <p>Excluir</p>
+          <p>Opções</p>
         </div>
       </div>
       <div className='resultado-lista'>
@@ -125,13 +127,17 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
                   className="livro"
                 >
                   <p className='livro-matricula'>{livro.id}</p>
-                  <h2 className='livro-nome'>{livro.nome}</h2>
+                  <p className='livro-nome'>{livro.nome}</p>
                   <p className='livro-categoria'>{livro.categoria}</p>
                   <p className='livro-data'>{dataDoLivro}</p>
-                  <p className='livro-enacional'>{livro.eNacional ? 'Sim' : 'Não'}</p>
+                  <p className='livro-enacional'>{livro.eNacional ? 'Nacional' : 'Estrangeiro'}</p>
                   <p className='livro-autor'>{livro.autor}</p>
-                  <button className='livro-botao-editar' onClick={() => handleEditar(livro)}>Editar</button>
-                  <DeletarLivro livro={livro} onClose={handleFecharModal} />
+                  <div className='livro-opcoes'>
+                    <button className='livro-botao-opcoes' onClick={() => handleEditar(livro)}>
+                      <img src={iconeEditar} alt="Editar Livro" />
+                    </button>
+                    <DeletarLivro livro={livro} onClose={handleFecharModal} />
+                  </div>
                 </div>
               )
             })

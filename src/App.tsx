@@ -61,7 +61,9 @@ function App() {
       <div className='biblioteca-header'>
         <div onClick={handleRemoverFiltro} className='biblioteca-logo'>
           <img src={bibliotecaLogo} alt="Logomarca" width={100} />
-          <strong>Minha Biblioteca</strong>
+          <span className='biblioteca-header-titulo'>
+            Minha Biblioteca
+          </span>
         </div>
         <div className="biblioteca-filtro">
           <form onSubmit={handleForm} className="biblioteca-formulario">

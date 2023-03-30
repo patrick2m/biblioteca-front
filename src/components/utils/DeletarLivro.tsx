@@ -3,6 +3,8 @@ import { Livro } from '../../App';
 import { api } from '../../lib/axios';
 import "./DeletarLivro.css"
 
+import iconeDeletar from '../../assets/iconDeletar.svg';
+
 type DeletarLivroProps = {
   onClose: () => void;
   livro: Livro;
@@ -25,7 +27,7 @@ const DeletarLivro: React.FC<DeletarLivroProps> = ({livro: livroAtual, onClose})
   }
 
   return (
-    <button className='deletar-livro' onClick={handleDeleteButton}>Excluir Livro</button>
+    <button className='deletar-livro' onClick={handleDeleteButton}><img src={iconeDeletar} alt="Deletar Livro" /></button>
   )
 }
 
