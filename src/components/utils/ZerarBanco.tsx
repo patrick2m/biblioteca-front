@@ -20,7 +20,7 @@ const ZerarBanco: React.FC<ZerarBancoProps> = ({ onClose }) => {
   }
   
   return (
-    <button className='botao-zerar-banco' onClick={ZerarBanco}>ZerarBanco</button>
+    <button className='botao-zerar-banco' onClick={ZerarBanco}>Resetar Biblioteca</button>
   )
 }
 

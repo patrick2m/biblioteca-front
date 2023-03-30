@@ -29,7 +29,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "O Pequeno Príncipe",
-          categoria: "Fábula",
+          categoria: "Fantasia",
           dataLancamento: "1943-01-01T00:00:00",
           eNacional: false,
           autor: "Antoine de Saint-Exupéry"
@@ -38,7 +38,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
           nome: "Cem Anos de Solidão",
           categoria: "Romance",
           dataLancamento: "1967-01-01T00:00:00",
-          eNacional: false,
+          eNacional: true,
           autor: "Gabriel García Márquez"
         },
         {
@@ -59,14 +59,14 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
           nome: "O Senhor dos Anéis",
           categoria: "Fantasia",
           dataLancamento: "1954-07-29T00:00:00",
-          eNacional: false,
+          eNacional: true,
           autor: "J.R.R. Tolkien"
         },
         {
           nome: "Os Miseráveis",
           categoria: "Romance",
           dataLancamento: "1862-01-01T00:00:00",
-          eNacional: false,
+          eNacional: true,
           autor: "Victor Hugo"
         },
         {
@@ -78,17 +78,17 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "A Revolução dos Bichos",
-          categoria: "Fábula",
+          categoria: "Fantasia",
           dataLancamento: "1945-08-17T00:00:00",
-          eNacional: false,
+          eNacional: true,
           autor: "George Orwell"
         },
         {
-          nome: "O Apanhador no Campo de Centeio",
+          nome: "Crepúsculo",
           categoria: "Romance",
-          dataLancamento: "1951-07-16T00:00:00",
+          dataLancamento: "2013-07-16T00:00:00",
           eNacional: false,
-          autor: "J.D. Salinger"
+          autor: "Stephenie Meyer"
         },
         {
           nome: "O Processo",
@@ -99,7 +99,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "A Divina Comédia",
-          categoria: "Poesia",
+          categoria: "Literatura",
           dataLancamento: "1472-01-01T00:00:00",
           eNacional: false,
           autor: "Dante Alighieri"
@@ -123,7 +123,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
           categoria: "Ficção",
           dataLancamento: "1958-10-28T00:00:00",
           eNacional: false,
-          autor: "Giuseppe Tomasi di Lampedusa"
+          autor: "Giuseppe Tomasi"
         },
         {
           nome: "O Hobbit",
@@ -148,7 +148,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "O Nome da Rosa",
-          categoria: "Mistério",
+          categoria: "Suspense",
           dataLancamento: "1980-09-01T00:00:00",
           eNacional: false,
           autor: "Umberto Eco"
@@ -177,7 +177,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
   }
 
   return (
-    <button className='botao-popular-banco' onClick={adicionarLivros}>PopularBanco</button>
+    <button className='botao-popular-banco' onClick={adicionarLivros}>Popular Biblioteca</button>
   )
 }
 

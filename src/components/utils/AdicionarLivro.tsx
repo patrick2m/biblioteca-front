@@ -10,23 +10,29 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
   const [ Nome, setNome ] = useState<string>('')
   const [ Categoria, setCategoria ] = useState<string>('Ação')
   const [ DataLancamento, setDataLancamento ] = useState<string>('')
-  const [ ENacional, setENacional ] = useState<boolean>(false)
+  const [ ENacional, setENacional ] = useState<string>('false')
   const [ Autor, setAutor ] = useState<string>('')
 
   function handleAdicionar(){
-    if (DataLancamento == '') {
+    if (Nome == '') {
+      alert('Você não selecionou o nome')
+      return
+    } else if (DataLancamento == '') {
+      alert('Você não selecionou a data')
+      return
+    } else if (Autor == '') {
       alert('Você não selecionou a data')
       return
     }
 
-    const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${Nome}, Categoria : ${Categoria}, Data de Lançamento : ${DataLancamento}, É Nacional : ${ENacional}`);
+    const confirmado = window.confirm(`Deseja realmente adicionar o livro? Nome : ${Nome}, Categoria : ${Categoria}, Data de Lançamento : ${DataLancamento}, É Nacional : ${ENacional}, Autor: ${Autor}`);
 
     if (confirmado) {
       api.post('/Livros', {
         nome: Nome,
         categoria: Categoria,
         dataLancamento: new Date(DataLancamento).toISOString(),
-        eNacional: ENacional,
+        eNacional: Boolean(ENacional),
         autor: Autor
       }).then(response => {
         if (response.status === 201) {
@@ -47,10 +53,10 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
     <div className='adicionar-overlay'>
       <div className='adicionar-container'>
         <h1>Adicionar Livro</h1>
-        <form className='adicionar-formulario'>
+        <div className='adicionar-formulario'>
           <label htmlFor="Nome">
             Nome : 
-            <input type="text" value={Nome} onChange={event => setNome(event.target.value)}/>
+            <input type="text" value={Nome} maxLength={24} onChange={event => setNome(event.target.value)}/>
           </label>
 
           <label htmlFor="Categoria">
@@ -81,12 +87,19 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
           </label>
 
           <label htmlFor="ENacional">
-            É Nacional?<input type="checkbox" name="eNacional" checked={ENacional} onChange={event => setENacional(event.target.checked)}/>
+            Origem:
+            <select 
+                value={ENacional} 
+                onChange={event => setENacional(event.target.value)}
+              >
+                <option value="true">Nacional</option>
+                <option value="false">Estrangeiro</option>
+              </select>
           </label>
 
           <label htmlFor="Autor">
             Autor : 
-            <input type="text" value={Autor} onChange={event => setAutor(event.target.value)}/>
+            <input type="text" value={Autor} maxLength={24} onChange={event => setAutor(event.target.value)}/>
           </label>
 
           <div className='adicionar-botoes'>
@@ -97,7 +110,7 @@ const AdicionarLivro: React.FC<AdicionarLivroProps> = ({ onClose }) => {
               Adicionar
             </button>
           </div>
-        </form>
+        </div>
       </div>
 
     </div>

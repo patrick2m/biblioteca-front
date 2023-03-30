@@ -19,52 +19,42 @@
   padding: 0 8px;
   gap: 8px;
 }
+
+.resultado-lista-container{
+
+}
+
+
 .resultado-cabecalho{
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  height: 32px;
+  background-color: #ccc;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+
+  height: 24px;
   background-color: rgba(223, 182, 121, 0.5);
   border: 1px solid #995C02;
   border-radius: 70px;
   color: rgba(0, 0, 0, 0.7);
-  font-family: Poppins;
-  font-size: 22px;
-  font-weight: 700;
-  text-align: left;
-  padding-left: 10px;
-}
-.resultado-cabecalho p{
-  display: flex;
-  width: 100px;
-  justify-content: center;
+  font-size: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
-
-.resultado-lista{
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-}
 .livro{
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 6rem;
-  height: 56px;
   background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 70px;
-  color: rgba(0, 0, 0, 0.7);
-  font-family: Poppins;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 35px;
-  white-space: nowrap;
   margin-top: 20px;
-  padding-left: 15px;
+  height: 32px;
+  padding: 2px;
+  color: #333;
+  border-radius: 70px;
+  white-space: nowrap;
 }
 
 .livro-matricula,
@@ -75,28 +65,33 @@
 .livro-botao-editar,
 .livro-autor{
   display: flex;
-  width: 102px;
+  width: 110px;
   align-items: center;
   justify-content: center;
-
+  font-size: 14px;
 }
 .livro-opcoes {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 .livro-botao-opcoes{
   border: none;
   background-color: transparent;
-  padding: 0;
+  cursor: pointer;
 }
 .botao-vermais-container{
   width: 100%;
-  /* background-color: red; */
   display: flex;
   margin: 50px 0;
   justify-content: center;
   align-items: center;
 }
+.livro-botao-opcoes img{
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+}
+
 .botaoVerMais{
   color: black;
   border: none;

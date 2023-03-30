@@ -87,6 +87,7 @@ function App() {
                 value={pesquisa}
                 onChange={event => setPesquisa(event.target.value)}
                 onSubmit={handleForm}
+                maxLength={24}
               />
             }
             {tipoPesquisa == "Matricula" && 
@@ -155,6 +156,7 @@ function App() {
                 autoFocus
                 value={pesquisa}
                 onChange={event => setPesquisa(event.target.value)}
+                maxLength={24}
               />
             }
           </label>

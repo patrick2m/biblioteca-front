@@ -15,10 +15,11 @@
 .adicionar-container {
   width: 80%;
   max-width: 600px;
-  background-color: #fff;
+  background-color: rgba(241, 228, 207, 1);
   padding: 20px;
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  
 }
 
 .adicionar h1 {
@@ -37,14 +38,6 @@
   align-items: center;
   gap: 8px;
   font-weight: bold;
-}
-
-.numero-id{
-  width: 80px;
-  height: 30px;
-  border: 1px solid black;
-  border-radius: 7%;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .adicionar-formulario {
@@ -68,15 +61,12 @@
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: #fff;
-}
-
-.adicionar-formulario input[type="checkbox"] {
-  width: auto;
-  margin-right: 5px;
+  border-radius: 70px;
+  background-color: rgba(153, 92, 2,0.5);
 }
 
 .adicionar-formulario select {
+  border-radius: 70px;
   width: 100%;
 }
 
@@ -87,12 +77,13 @@
 }
 
 .adicionar-botoes button {
-  background-color: #007bff;
+  background-color: rgba(153, 92, 2,0.8);
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 10px;
 }
 
 .adicionar-botoes button:hover {
-  background-color: #0062cc;
+  background-color: rgba(153, 92, 2,1);
 }

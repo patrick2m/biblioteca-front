@@ -12,24 +12,8 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
   const [nome, setNome] = useState(livro.nome);
   const [categoria, setCategoria] = useState(livro.categoria);
   const [dataLancamento, setDataLancamento] = useState(livro.dataLancamento);
-  const [eNacional, setENacional] = useState(livro.eNacional);
+  const [eNacional, setENacional] = useState<string>(livro.eNacional.toString());
   const [autor, setAutor] = useState(livro.autor);
-
-  const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNome(event.target.value);
-  };
-
-  const handleCategoriaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoria(event.target.value);
-  };
-
-  const handleDataLancamentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDataLancamento(event.target.value);
-  };
-
-  const handleENacionalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setENacional(event.target.checked);
-  };
 
   const handleAutorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAutor(event.target.value);
@@ -41,7 +25,7 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
       nome,
       categoria,
       dataLancamento: new Date(dataLancamento),
-      eNacional,
+      eNacional: Boolean(eNacional),
       autor,
     };
 
@@ -69,12 +53,12 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
 
           <label htmlFor='Nome'>
             Nome:
-            <input type="text" value={nome} autoFocus onChange={handleNomeChange} />
+            <input type="text" maxLength={24} value={nome} autoFocus onChange={event => setNome(event.target.value)} />
           </label>
 
           <label htmlFor='Categoria'>
             Categoria:
-            <select value={categoria} onChange={(event) => handleCategoriaChange(event)}>
+            <select value={categoria} onChange={event => setCategoria(event.target.value)}>
               <option value="Ação">Ação</option>
               <option value="Aventura">Aventura</option>
               <option value="Biografia">Biografia</option>
@@ -96,19 +80,25 @@ const EditarLivro: React.FC<EditarLivroProps> = ({ livro, onClose }) => {
 
           <label htmlFor='DataLancamento'>
             Data de Lançamento:
-            <input type="date" value={dataLancamento.substring(0, 10)} onChange={handleDataLancamentoChange} />
+            <input type="date" value={dataLancamento.substring(0, 10)} onChange={event => setDataLancamento(event.target.value)} />
           </label>
 
-          <label htmlFor='ENacional'>
-            É Nacional?
-            <input type="checkbox" checked={eNacional} onChange={handleENacionalChange} />
+          <label htmlFor="ENacional">
+            Origem:
+            <select 
+                value={eNacional} 
+                onChange={event => setENacional(event.target.value)}
+              >
+                <option value="true">Nacional</option>
+                <option value="false">Estrangeiro</option>
+              </select>
           </label>
 
           <label htmlFor='Autor'>
             Autor:
-            <input type="text" value={autor} autoFocus onChange={handleAutorChange} />
+            <input type="text" maxLength={24} value={autor} autoFocus onChange={event => setAutor(event.target.value)} />
           </label>
-          
+
           <div className="editar-botoes">
             <button type="button" onClick={onClose}>
               Cancelar

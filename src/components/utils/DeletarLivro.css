@@ -5,3 +5,7 @@
   padding-right: 10px;
   cursor: pointer;
 }
+.deletar-livro img {
+  width: 24px;
+  height: 24px;
+}

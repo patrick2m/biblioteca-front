@@ -24,7 +24,7 @@ type ResultadoBuscaProps = {
 const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado, chaveBuscada, onRefresh }) => {
   const [ livroSelecionado, setLivroSelecionado ] = useState<Livro | null>(null);
   const [ respostaPesquisa,setRespostaPesquisa ] = useState<Livro[]>([]);
-  const [ adicionarLivro, setAdicionarLivro ] = useState<boolean>(false);
+  const [ adicionarLivro, setAdicionarLivro ] = useState<boolean|null>(false);
   const [ quantidadeMostrada, setQuantidadeMostrada ] = useState<number>(10);
   const [ botaoVerMaisHabilitado, setBotaoVerMaisHabilitado ] = useState<boolean>(false);
 
@@ -46,13 +46,12 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
   }
 
   const handleFecharAdicionar = () => {
-    setAdicionarLivro(false)
+    setAdicionarLivro(null)
     if (buscaTodos) {
       buscarTodos()
     } else {
       pesquisar(tipoBuscado, chaveBuscada);
     }
-    setQuantidadeMostrada(10)
   }
 
   function buscarTodos() {
