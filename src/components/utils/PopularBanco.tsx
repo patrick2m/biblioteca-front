@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Livro } from '../../App';
 import { api } from '../../lib/axios';
 
+import "./PopularBanco.css"
+
 type PopularBancoProps = {
   onClose: () => void;
 }
@@ -175,7 +177,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
   }
 
   return (
-    <button onClick={adicionarLivros}>PopularBanco</button>
+    <button className='botao-popular-banco' onClick={adicionarLivros}>PopularBanco</button>
   )
 }
 

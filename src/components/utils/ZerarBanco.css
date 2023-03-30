@@ -1,0 +1,7 @@
+.botao-zerar-banco{
+  border: none;
+  background-color: transparent;  
+  text-decoration: underline;  
+  cursor: pointer;
+  color: rgba( 0, 0, 0, 0.60);
+}

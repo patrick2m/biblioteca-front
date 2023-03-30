@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { api } from '../../lib/axios'
+
+import "./ZerarBanco.css"
 
 type ZerarBancoProps = {
   onClose: () => void;
@@ -18,7 +20,7 @@ const ZerarBanco: React.FC<ZerarBancoProps> = ({ onClose }) => {
   }
   
   return (
-    <button onClick={ZerarBanco}>ZerarBanco</button>
+    <button className='botao-zerar-banco' onClick={ZerarBanco}>ZerarBanco</button>
   )
 }
 

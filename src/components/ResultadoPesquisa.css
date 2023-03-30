@@ -4,8 +4,20 @@
   margin: 0 auto;
   max-width: 1000px;
 }
-.resultado-header{
-
+.resultado-utils{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.resultado-botao-adicionar{
+  display: flex;
+  background-color: rgba(223, 182, 121, 0.5);
+  height: 32px;
+  align-items: center;
+  border: 2px solid #995C02;
+  border-radius: 20px;
+  padding: 0 8px;
+  gap: 8px;
 }
 .resultado-cabecalho{
   display: flex;
@@ -30,11 +42,7 @@
   justify-content: center;
 }
 
-.resultado-utils{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+
 .resultado-lista{
   display: flex;
   flex-direction: column;
