@@ -102,3 +102,10 @@
   padding-right: 10px;
   cursor: pointer;
 }
+
+.livro-faltante{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+}

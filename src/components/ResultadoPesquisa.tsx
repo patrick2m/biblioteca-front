@@ -143,7 +143,7 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
                 )
               })
             ) : (
-              <h1>Não há livros com estes parâmetros</h1>
+              <h2 className='livro-faltante'>Não foram encontrados Livros</h2>
             )
           }
         </div>
