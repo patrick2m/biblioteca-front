@@ -67,6 +67,7 @@ function App() {
           </span>
         </div>
         <form onSubmit={handleForm} className="biblioteca-formulario">
+          <span>Filtrar por:</span>
           <label htmlFor="Tipo de Pesquisa">
             <select className='biblioteca-formulario-tipopesquisa' value={tipoPesquisa} onChange={handleTipoPesquisa}>
               <option value="Nome">Nome</option>
