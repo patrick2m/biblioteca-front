@@ -10,6 +10,7 @@ import PopularBanco from './utils/PopularBanco';
 import ZerarBanco from './utils/ZerarBanco';
 
 import iconeEditar from '../assets/iconEditar.svg';
+import seta from '../assets/seta.svg';
 
 
 type ResultadoBuscaProps = {
@@ -32,7 +33,6 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
 
   const handleAdicionarLivro = () => {
     setAdicionarLivro(true);
-    setQuantidadeMostrada(10)
   }
 
   const handleFecharModal = () => {
@@ -42,8 +42,6 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
     } else {
       pesquisar(tipoBuscado, chaveBuscada);
     }
-    onRefresh()
-    setQuantidadeMostrada(10)
   }
 
   const handleFecharAdicionar = () => {
@@ -145,11 +143,15 @@ const ResultadoBusca: React.FC<ResultadoBuscaProps> = ({ buscaTodos, tipoBuscado
             <h1>Não há livros com estes parâmetros</h1>
           )
         }
+      </div>
+      <div className='botao-vermais-container'>
         {
           !botaoVerMaisHabilitado ? (
-            <button onClick={() => setQuantidadeMostrada(quantidadeMostrada + 10)}>Ver Mais +</button>
+            <button className='botaoVerMais' onClick={() => setQuantidadeMostrada(quantidadeMostrada + 10)}>
+              Ver Mais <img src={seta} alt="Ver Mais" />
+            </button>
           ):(
-            <button disabled onClick={() => setQuantidadeMostrada(quantidadeMostrada + 10)}>Ver Mais +</button>
+            <div className=''></div>
           )
         }
       </div>

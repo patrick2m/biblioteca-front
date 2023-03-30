@@ -48,7 +48,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "1984",
-          categoria: "Ficção científica",
+          categoria: "Ficção Científica",
           dataLancamento: "1949-01-01T00:00:00",
           eNacional: false,
           autor: "George Orwell"
@@ -90,14 +90,14 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "O Processo",
-          categoria: "Ficção filosófica",
+          categoria: "Ficção",
           dataLancamento: "1925-04-26T00:00:00",
           eNacional: false,
           autor: "Franz Kafka"
         },
         {
           nome: "A Divina Comédia",
-          categoria: "Poesia épica",
+          categoria: "Poesia",
           dataLancamento: "1472-01-01T00:00:00",
           eNacional: false,
           autor: "Dante Alighieri"
@@ -118,7 +118,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "O Leopardo",
-          categoria: "Ficção histórica",
+          categoria: "Ficção",
           dataLancamento: "1958-10-28T00:00:00",
           eNacional: false,
           autor: "Giuseppe Tomasi di Lampedusa"
@@ -153,7 +153,7 @@ const PopularBanco: React.FC<PopularBancoProps> = ({ onClose }) => {
         },
         {
           nome: "Drácula",
-          categoria: "Terror gótico",
+          categoria: "Terror",
           dataLancamento: "1897-05-26T00:00:00",
           eNacional: false,
           autor: "Bram Stoker"
